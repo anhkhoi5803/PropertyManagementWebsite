@@ -1,0 +1,96 @@
+﻿@model IEnumerable<FinalPro.Models.Appartment>
+@using FinalPro.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+
+    @if (true)
+    {
+
+        var user = Session["User"] as User;
+        var role = user.Role;
+        if (role != "PotentialTenant")
+        {
+            @Html.ActionLink("Create New", "Create")
+
+        }
+    }
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Available)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumOfBedrooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumOfBathRooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Building.Address)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Available)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfBedrooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfBathRooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Building.Address)
+            </td>
+            <td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.AppartmentId })
+            </td>
+
+            @if (true)
+            {
+
+                var user = Session["User"] as User;
+                var role = user.Role;
+                if (role != "PotentialTenant")
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.AppartmentId })
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.AppartmentId })
+                    </td>
+
+                }
+            }
+            </td>
+        </tr>
+    }
+
+</table>

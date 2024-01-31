@@ -1,0 +1,77 @@
+﻿@using System.Web.Optimization
+@using FinalPro.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -Property Management Website</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-brand">@Html.ActionLink("Property Management Website", "Index", "Landing", new { area = "" }, new { @class = "nav-link" })</div>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    @if (User.Identity.IsAuthenticated && Session["User"] != null)
+                    {
+                        var user = Session["User"] as User;
+                        var role = user.Role;
+                        if (role == "PotentialTenant" || role == "Administrator" || role == "PropertyOwner" || role == "PropertyManager")
+                        {
+
+                        }
+
+                        <li>@Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Buildings", "Index", "Buildings", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Appartments", "Index", "Appartments", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Appointments", "Index", "Appointments", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Messages", "Index", "Messages", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Accounts", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Accounts", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container body-content">
+        @if (User.Identity.IsAuthenticated && Session["User"]!=null)
+        {
+
+        var user = (User)Session["User"];
+        var name = user.FirstName + " " + user.LastName;
+        var role = user.Role;
+            <h1>Hello - @name </h1>
+            <h2>Your role is @role</h2>
+
+        }
+
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    
+</body>
+</html>

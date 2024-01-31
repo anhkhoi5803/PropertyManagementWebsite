@@ -1,0 +1,132 @@
+﻿@model IEnumerable<FinalPro.Models.Building>
+@using FinalPro.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+
+    @if (true)
+    {
+
+        var user = Session["User"] as User;
+        var role = user.Role;
+        if (role != "PotentialTenant")
+        {
+            @Html.ActionLink("Create New", "Create")
+
+        }
+    }
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Province)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildingName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasLaundry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasParking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncludeUtils)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CloseToTransit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User1)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Province)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasLaundry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasParking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncludeUtils)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CloseToTransit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User1.FirstName) @Html.DisplayFor(modelItem => item.User1.LastName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.BuildingId })
+            </td>
+
+            @if (true)
+            {
+
+                var user = Session["User"] as User;
+                var role = user.Role;
+                if (role != "PotentialTenant")
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.BuildingId })
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.BuildingId })
+                    </td>
+
+                }
+            }
+
+        </tr>
+    }
+
+</table>
